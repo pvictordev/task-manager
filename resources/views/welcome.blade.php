@@ -831,30 +831,44 @@
 </head>
 
 <body>
-    <div class="p-6 h-screen bg-gray-100 rounded-lg shadow-md">
-        <h1 class="text-3xl font-semibold mb-6">Task Manager</h1>
-        <form method="POST" action="{{route('storeItem')}}" accept-charset="UTF-8" class="flex items-center mb-5">
-            {{ csrf_field() }}
-            <label for="taskItem" class="mr-4 text-lg">Create a new task</label>
-            <input type="text" name="taskItem" class="px-4 py-2 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
-            <button type="submit" class="mx-3 px-6 py-3 bg-red-600 rounded-md hover:bg-green-600">Create</button>
-        </form>
-        @foreach ($taskItems as $taskItem)
-        <div class="flex items-center justify-between mb-4 bg-white rounded-lg shadow-md px-4 py-3">
-            <p class="text-lg">{{$taskItem->name}}</p>
-            <div class="flex gap-2">
-                <form method="POST" action="{{route('markComplete', $taskItem->id)}}">
-                    {{ csrf_field() }}
-                    <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Mark</button>
-                </form>
-                <form method="GET" action="{{route('editItem', $taskItem->id)}}">
-                    {{ csrf_field() }}
-                    <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Edit</button>
-                </form>
+    <nav class="bg-gray-800 p-4">
+        <div class="container mx-auto flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="text-white text-xl font-bold">Task Manager</a>
+
+            <!-- Navigation Links -->
+            <div class="flex space-x-4">
+                <a href="#" class="text-white hover:text-gray-300">Marked</a>
             </div>
         </div>
-        @endforeach
-    </div>
+    </nav>
+
+    <main class="p-6 flex justify-center h-screen bg-gray-100 rounded-lg shadow-md">
+        <div class="container flex-column items-center justify-between">
+            <h1 class="text-3xl font-semibold mb-10">Create</h1>
+            <form method="POST" action="{{route('storeItem')}}" accept-charset="UTF-8" class="flex items-center mb-5">
+                {{ csrf_field() }}
+                <label for="taskItem" class="mr-4 text-lg">Create a new task</label>
+                <input type="text" name="taskItem" class="px-4 py-2 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                <button type="submit" class="mx-3 px-6 py-2 bg-green-500 text-dark rounded-md hover:bg-green-600 hover:text-white">Create</button>
+            </form>
+            @foreach ($taskItems as $taskItem)
+            <div class="flex items-center justify-between mb-4 bg-white rounded-lg shadow-md px-4 py-3">
+                <p class="text-lg">{{$taskItem->name}}</p>
+                <div class="flex gap-2">
+                    <form method="POST" action="{{route('markComplete', $taskItem->id)}}">
+                        {{ csrf_field() }}
+                        <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Mark</button>
+                    </form>
+                    <form method="GET" action="{{route('editItem', $taskItem->id)}}">
+                        {{ csrf_field() }}
+                        <button class="px-4 py-2 bg-amber-500 text-white rounded hover:bg-amber-600">Edit</button>
+                    </form>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </main>
 </body>
 
 </html>
