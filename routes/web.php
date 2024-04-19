@@ -25,6 +25,10 @@ Route::post('/storeItemRoute', [TaskController::class, 'storeItem'])->name('stor
 
 Route::post('/markCompleteRoute/{id}', [TaskController::class, 'markComplete'])->name('markComplete');
 
+Route::get('/editItem/{id}', [TaskController::class, 'editItem'])->name('editItem');
+
+Route::put('/updateItem/{id}', [TaskController::class, 'updateItem'])->name('updateItem');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -34,6 +38,5 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
 
 require __DIR__ . '/auth.php';

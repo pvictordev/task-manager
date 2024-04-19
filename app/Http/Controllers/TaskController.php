@@ -33,4 +33,37 @@ class TaskController extends Controller
 
         return redirect('/');
     }
+    public function editItem(Request $request, $id)
+    {
+
+        // Find the task item by its ID
+        $taskItem = TaskItem::find($id);
+
+        // Check if the task item exists
+        if (!$taskItem) {
+            return redirect()->back()->with('error', 'Task item not found.');
+        }
+
+        // Pass the task item to the edit view
+        return view('edit', compact('taskItem'));
+    }
+    public function updateItem(Request $request, $id)
+    {
+        $taskItem = TaskItem::find($id);
+
+        // Check if the task item exists
+        if (!$taskItem) {
+            return redirect()->back()->with('error', 'Task item not found.');
+        }
+
+        $request->validate([
+            'taskItem' => 'required|string|max:255',
+        ]);
+
+        $taskItem->name = $request->taskItem;
+
+        $taskItem->save();
+
+        return redirect('/');
+    }
 }

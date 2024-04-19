@@ -841,13 +841,17 @@
         </form>
         @foreach ($taskItems as $taskItem)
         <div class="flex items-center justify-between mb-4 bg-white rounded-lg shadow-md px-4 py-3">
-            <span>{{$taskItem->id}}</span>
             <p class="text-lg">{{$taskItem->name}}</p>
-            <form method="POST" action="{{route('markComplete', $taskItem->id)}}">
-                {{ csrf_field() }}
-                <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Mark</button>
-            </form>
-
+            <div class="flex gap-2">
+                <form method="POST" action="{{route('markComplete', $taskItem->id)}}">
+                    {{ csrf_field() }}
+                    <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Mark</button>
+                </form>
+                <form method="GET" action="{{route('editItem', $taskItem->id)}}">
+                    {{ csrf_field() }}
+                    <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Edit</button>
+                </form>
+            </div>
         </div>
         @endforeach
     </div>
