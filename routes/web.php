@@ -3,6 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+// use the task controller
+use App\Http\Controllers\TaskController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +18,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [TaskController::class, 'index']);
+
+// route for storing the tasks
+Route::post('/storeItemRoute', [TaskController::class, 'storeItem'])->name('storeItem');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -28,4 +33,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+
+require __DIR__ . '/auth.php';
