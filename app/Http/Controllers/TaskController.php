@@ -13,7 +13,16 @@ class TaskController extends Controller
     public function index()
     {
         // get in the view all the items
-        return view('welcome', ['taskItems' => TaskItem::all()]);
+        return view('welcome', ['taskItems' => TaskItem::where('is_complete', 0)->get()]);
+    }
+    public function markComplete($id)
+    {
+        // get in the view all the items
+        $taskItem = TaskItem::find($id);
+        $taskItem->is_complete = 1;
+        $taskItem->save();
+
+        return redirect('/');
     }
     public function storeItem(Request $request)
     {

@@ -18,10 +18,12 @@ use App\Http\Controllers\TaskController;
 |
 */
 
+// task manager functionality routes
 Route::get('/', [TaskController::class, 'index']);
 
-// route for storing the tasks
 Route::post('/storeItemRoute', [TaskController::class, 'storeItem'])->name('storeItem');
+
+Route::post('/markCompleteRoute/{id}', [TaskController::class, 'markComplete'])->name('markComplete');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

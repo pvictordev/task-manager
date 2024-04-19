@@ -831,25 +831,26 @@
 </head>
 
 <body>
-    <div class="p-6 bg-gray-100 rounded-lg shadow-md">
+    <div class="p-6 h-screen bg-gray-100 rounded-lg shadow-md">
         <h1 class="text-3xl font-semibold mb-6">Task Manager</h1>
-        @foreach ($taskItems as $taskItem)
-        <div class="flex items-center justify-between mb-4 bg-white rounded-lg shadow-md px-4 py-3">
-            <p class="text-lg">{{$taskItem->name}}</p>
-            <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Mark</button>
-        </div>
-        @endforeach
-
-        <form method="POST" action="{{route('storeItem')}}" accept-charset="UTF-8" class="flex items-center">
+        <form method="POST" action="{{route('storeItem')}}" accept-charset="UTF-8" class="flex items-center mb-5">
             {{ csrf_field() }}
             <label for="taskItem" class="mr-4 text-lg">Create a new task</label>
             <input type="text" name="taskItem" class="px-4 py-2 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
-            <button type="submit" class="px-6 py-3 bg-green-500 text-white rounded-md hover:bg-green-600">Create</button>
+            <button type="submit" class="mx-3 px-6 py-3 bg-red-600 rounded-md hover:bg-green-600">Create</button>
         </form>
+        @foreach ($taskItems as $taskItem)
+        <div class="flex items-center justify-between mb-4 bg-white rounded-lg shadow-md px-4 py-3">
+            <span>{{$taskItem->id}}</span>
+            <p class="text-lg">{{$taskItem->name}}</p>
+            <form method="POST" action="{{route('markComplete', $taskItem->id)}}">
+                {{ csrf_field() }}
+                <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Mark</button>
+            </form>
+
+        </div>
+        @endforeach
     </div>
-
-
-
 </body>
 
 </html>
