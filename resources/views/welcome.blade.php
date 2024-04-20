@@ -834,11 +834,11 @@
     <nav class="bg-gray-800 p-4">
         <div class="container mx-auto flex items-center justify-between">
             <!-- Logo -->
-            <a href="#" class="text-white text-xl font-bold">Task Manager</a>
+            <a href="/" class="text-white text-xl font-bold">Task Manager</a>
 
             <!-- Navigation Links -->
             <div class="flex space-x-4">
-                <a href="#" class="text-white hover:text-gray-300">Marked</a>
+                <a href="/markedRoute" class="text-white hover:text-gray-300">Marked</a>
             </div>
         </div>
     </nav>

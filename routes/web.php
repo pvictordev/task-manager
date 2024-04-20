@@ -25,9 +25,14 @@ Route::post('/storeItemRoute', [TaskController::class, 'storeItem'])->name('stor
 
 Route::post('/markCompleteRoute/{id}', [TaskController::class, 'markComplete'])->name('markComplete');
 
+Route::get('/markedRoute', [TaskController::class, 'marked'])->name('marked');
+
 Route::get('/editItem/{id}', [TaskController::class, 'editItem'])->name('editItem');
 
 Route::put('/updateItem/{id}', [TaskController::class, 'updateItem'])->name('updateItem');
+
+Route::delete('/deleteItem/{id}', [TaskController::class, 'deleteItem'])->name('deleteItem');
+
 //
 Route::get('/dashboard', function () {
     return view('dashboard');

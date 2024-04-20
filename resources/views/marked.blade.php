@@ -31,15 +31,20 @@
 
         <main class="p-6 flex justify-center h-screen bg-gray-100 rounded-lg shadow-md">
             <div class="container flex-column items-center justify-between">
-                <h1 class="text-3xl font-semibold mb-10">Edit</h1>
-                <form method="POST" action="{{ route('updateItem', $taskItem->id) }}" accept-charset="UTF-8" class="flex items-center mb-5">
-                    @csrf
-                    @method('PUT')
-                    <label for="taskItem" class="mr-4 text-lg">Edit task name</label>
-                    <input type="text" name="taskItem" id="taskItem" class="px-4 py-2 bg-white border border-gray-300 rounded-md focus:outline-none value=" {{ $taskItem->name }}">
-                    <button type="submit" class="mx-3 px-6 py-2 bg-amber-500 text-white rounded-md hover:bg-amber-600">Update</button>
-                </form>
+                <h1 class="text-3xl font-semibold mb-10">Marked</h1>
 
+                @foreach ($taskItems as $taskItem)
+                <div class="flex items-center justify-between mb-4 bg-white rounded-lg shadow-md px-4 py-3">
+                    <p class="text-lg">{{$taskItem->name}}</p>
+                    <div class="flex gap-2">
+                        <form method="POST" action="{{route('deleteItem', $taskItem->id)}}">
+                            {{ csrf_field() }}
+                            @method('DELETE')
+                            <button class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Delete</button>
+                        </form>
+                    </div>
+                </div>
+                @endforeach
             </div>
         </main>
     </body>

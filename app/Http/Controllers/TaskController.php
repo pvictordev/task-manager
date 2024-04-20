@@ -15,6 +15,12 @@ class TaskController extends Controller
         // get in the view all the items
         return view('welcome', ['taskItems' => TaskItem::where('is_complete', 0)->get()]);
     }
+    public function marked()
+    {
+        // get in the view all the items
+        return view('marked', ['taskItems' => TaskItem::where('is_complete', 1)->get()]);
+    }
+
     public function markComplete($id)
     {
         // get in the view all the items
@@ -24,6 +30,7 @@ class TaskController extends Controller
 
         return redirect('/');
     }
+
     public function storeItem(Request $request)
     {
         $newTaskItem = new TaskItem;
@@ -65,5 +72,18 @@ class TaskController extends Controller
         $taskItem->save();
 
         return redirect('/');
+    }
+    public function deleteItem($id)
+    {
+        $taskItem = TaskItem::find($id);
+
+        // Check if the task item exists
+        if (!$taskItem) {
+            return redirect()->back()->with('error', 'Task item not found.');
+        }
+
+        $taskItem->delete();
+
+        return redirect('/markedRoute');
     }
 }
