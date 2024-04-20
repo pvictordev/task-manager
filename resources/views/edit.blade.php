@@ -36,10 +36,9 @@
                     @csrf
                     @method('PUT')
                     <label for="taskItem" class="mr-4 text-lg">Edit task name</label>
-                    <input type="text" name="taskItem" id="taskItem" class="px-4 py-2 bg-white border border-gray-300 rounded-md focus:outline-none value=" {{ $taskItem->name }}">
+                    <input type="text" name="taskItem" id="taskItem" class="px-4 py-2 bg-white border border-gray-300 rounded-md focus:outline-none" value="{{ $taskItem->name }}" />
                     <button type="submit" class="mx-3 px-6 py-2 bg-amber-500 text-white rounded-md hover:bg-amber-600">Update</button>
                 </form>
-
             </div>
         </main>
     </body>
