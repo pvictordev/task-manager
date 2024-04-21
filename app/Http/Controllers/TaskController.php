@@ -13,7 +13,11 @@ class TaskController extends Controller
     public function index()
     {
         // get in the view all the items
-        return view('welcome', ['taskItems' => TaskItem::where('is_complete', 0)->get()]);
+        return view('welcome');
+    }
+    public function unmarked()
+    {
+        return view('dashboard', ['taskItems' => TaskItem::where('is_complete', 0)->get()]);
     }
     public function marked()
     {
@@ -28,7 +32,7 @@ class TaskController extends Controller
         $taskItem->is_complete = 1;
         $taskItem->save();
 
-        return redirect('/');
+        return redirect('/markedRoute');
     }
 
     public function storeItem(Request $request)
@@ -38,7 +42,7 @@ class TaskController extends Controller
         $newTaskItem->is_complete = 0;
         $newTaskItem->save();
 
-        return redirect('/');
+        return redirect('/dashboard');
     }
     public function editItem(Request $request, $id)
     {

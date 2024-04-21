@@ -17,6 +17,8 @@
 <body>
 
     <body>
+        <a class="absolute text-white left-5 text-5xl" href="/dashboard">←</a>
+
         <nav class="bg-gray-800 p-4">
             <div class="container mx-auto flex items-center justify-between">
                 <!-- Logo -->
@@ -29,7 +31,7 @@
             </div>
         </nav>
 
-        <main class="p-6 flex justify-center h-screen bg-gray-100 rounded-lg shadow-md">
+        <main class="p-6 pt-12 flex justify-center h-screen bg-gray-100 rounded-lg shadow-md">
             <div class="container flex-column items-center justify-between">
                 <h1 class="text-3xl font-semibold mb-10">Marked</h1>
 
