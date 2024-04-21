@@ -2,10 +2,10 @@
     <!-- Primary Navigation Menu -->
     <div class="container mx-auto ">
         <div class="flex justify-between items-center h-16">
-            <div class="flex">
+            <div class="flex items-center">
                 <!-- Navigation Links -->
                 <div class="hidden sm:flex">
-                    <a href="/" class="text-white text-xl font-bold">Task Manager</a>
+                    <a href="/dashboard" class="text-white text-xl font-bold">Task Manager</a>
                 </div>
             </div>
 

@@ -15,39 +15,28 @@
 @vite('resources/css/app.css')
 
 <body>
+    @include('layouts.navigation')
 
-    <body>
-        <a class="absolute text-white left-5 text-5xl" href="/dashboard">←</a>
+    <a class="absolute text-dark left-5 text-5xl" href="/dashboard">←</a>
 
-        <nav class="bg-gray-800 p-4">
-            <div class="container mx-auto flex items-center justify-between">
-                <!-- Logo -->
-                <a href="/" class="text-white text-xl font-bold">Task Manager</a>
+    <main class="p-6 pt-20 flex justify-center h-screen bg-gray-100 rounded-lg shadow-md">
 
-                <!-- Navigation Links -->
-                <div class="flex space-x-4">
-                    <a href="#" class="text-white hover:text-gray-300">Marked</a>
+        <div class="container flex-column items-center justify-between">
+            <h1 class="text-3xl font-semibold mb-10">Marked</h1>
+
+            @foreach ($taskItems as $taskItem)
+            <div class="flex items-center justify-between mb-4 bg-white rounded-lg shadow-md px-4 py-3">
+                <p class="text-lg">{{$taskItem->name}}</p>
+                <div class="flex gap-2">
+                    <form method="POST" action="{{route('deleteItem', $taskItem->id)}}">
+                        {{ csrf_field() }}
+                        @method('DELETE')
+                        <button class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Delete</button>
+                    </form>
                 </div>
             </div>
-        </nav>
+            @endforeach
+        </div>
+    </main>
 
-        <main class="p-6 pt-12 flex justify-center h-screen bg-gray-100 rounded-lg shadow-md">
-            <div class="container flex-column items-center justify-between">
-                <h1 class="text-3xl font-semibold mb-10">Marked</h1>
-
-                @foreach ($taskItems as $taskItem)
-                <div class="flex items-center justify-between mb-4 bg-white rounded-lg shadow-md px-4 py-3">
-                    <p class="text-lg">{{$taskItem->name}}</p>
-                    <div class="flex gap-2">
-                        <form method="POST" action="{{route('deleteItem', $taskItem->id)}}">
-                            {{ csrf_field() }}
-                            @method('DELETE')
-                            <button class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Delete</button>
-                        </form>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-        </main>
-    </body>
 </body>
