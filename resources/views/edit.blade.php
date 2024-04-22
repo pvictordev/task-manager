@@ -17,19 +17,11 @@
 <body>
 
     <body>
-        <nav class="bg-gray-800 p-4">
-            <div class="container mx-auto flex items-center justify-between">
-                <!-- Logo -->
-                <a href="/" class="text-white text-xl font-bold">Task Manager</a>
+        @include('layouts.navigation')
 
-                <!-- Navigation Links -->
-                <div class="flex space-x-4">
-                    <a href="#" class="text-white hover:text-gray-300">Marked</a>
-                </div>
-            </div>
-        </nav>
+        <a class="absolute text-dark left-5 text-5xl" href="/dashboard">←</a>
 
-        <main class="p-6 flex justify-center h-screen bg-gray-100 rounded-lg shadow-md">
+        <main class="p-6 pt-20 flex justify-center h-screen bg-gray-100 rounded-lg shadow-md">
             <div class="container flex-column items-center justify-between">
                 <h1 class="text-3xl font-semibold mb-10">Edit</h1>
                 <form method="POST" action="{{ route('updateItem', $taskItem->id) }}" accept-charset="UTF-8" class="flex items-center mb-5">

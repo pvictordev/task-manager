@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+
 // import the model
 use App\Models\TaskItem;
+use App\Models\UserTask;
+
 
 class TaskController extends Controller
 {
@@ -15,14 +19,41 @@ class TaskController extends Controller
         // get in the view all the items
         return view('welcome');
     }
+    public function storeItem(Request $request)
+    {
+        $newTaskItem = new TaskItem;
+        $newTaskItem->name = $request->taskItem;
+        $newTaskItem->is_complete = 0;
+        $newTaskItem->save();
+
+        // Create user_task record
+        // this is not working
+        $userId = Auth::id();
+        $newUserTask = new UserTask;
+        $newUserTask->user_id = $userId;
+        $newUserTask->task_item_id = $newTaskItem->id;
+        $newUserTask->save();
+
+        return redirect('/dashboard');
+    }
     public function unmarked()
     {
-        return view('dashboard', ['taskItems' => TaskItem::where('is_complete', 0)->get()]);
+        /** @var User $user */ // Type hinting for $user variable
+        // Get the authenticated user
+        $user = Auth::user();
+
+        $unmarkedNotes = $user->taskItems()->where('is_complete', 0)->get();
+
+        return view('dashboard', ['taskItems' => $unmarkedNotes]);
     }
     public function marked()
     {
-        // get in the view all the items
-        return view('marked', ['taskItems' => TaskItem::where('is_complete', 1)->get()]);
+        /** @var User $user */ // Type hinting for $user variable
+        // Get the authenticated user
+        $user = Auth::user();
+        $unmarkedNotes = $user->taskItems()->where('is_complete', 1)->get();
+
+        return view('marked', ['taskItems' => $unmarkedNotes]);
     }
 
     public function markComplete($id)
@@ -35,15 +66,16 @@ class TaskController extends Controller
         return redirect('/markedRoute');
     }
 
-    public function storeItem(Request $request)
+    public function unmark($id)
     {
-        $newTaskItem = new TaskItem;
-        $newTaskItem->name = $request->taskItem;
-        $newTaskItem->is_complete = 0;
-        $newTaskItem->save();
+        // get in the view all the items
+        $taskItem = TaskItem::find($id);
+        $taskItem->is_complete = 0;
+        $taskItem->save();
 
         return redirect('/dashboard');
     }
+
     public function editItem(Request $request, $id)
     {
 
@@ -75,7 +107,7 @@ class TaskController extends Controller
 
         $taskItem->save();
 
-        return redirect('/');
+        return redirect('/dashboard');
     }
     public function deleteItem($id)
     {

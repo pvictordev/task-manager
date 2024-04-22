@@ -10,7 +10,7 @@
                     <input type="text" name="taskItem" class="px-4 py-2  bg-white border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required />
                     <button type="submit" class="mx-3 px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Create</button>
                 </form>
-                <a class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" href="/markedRoute">
+                <a class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600" href="/markedRoute">
                     Marked
                 </a>
             </div>

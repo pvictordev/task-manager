@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Route;
 // use the task controller
 use App\Http\Controllers\TaskController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +24,8 @@ Route::post('/storeItemRoute', [TaskController::class, 'storeItem'])->name('stor
 
 Route::post('/markCompleteRoute/{id}', [TaskController::class, 'markComplete'])->name('markComplete');
 
+Route::post('/unmarkRoute/{id}', [TaskController::class, 'unmark'])->name('unmark');
+
 Route::get('/markedRoute', [TaskController::class, 'marked'])->name('marked');
 
 Route::get('/editItem/{id}', [TaskController::class, 'editItem'])->name('editItem');
@@ -33,7 +34,6 @@ Route::put('/updateItem/{id}', [TaskController::class, 'updateItem'])->name('upd
 
 Route::delete('/deleteItem/{id}', [TaskController::class, 'deleteItem'])->name('deleteItem');
 
-//
 Route::get('/dashboard', [TaskController::class, 'unmarked'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
