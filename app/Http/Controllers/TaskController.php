@@ -19,9 +19,8 @@ class TaskController extends Controller
         // get in the view all the items
         return view('welcome');
     }
-    public function storeItem(Request $request)
+    public function storeItem(Request $request, TaskItem $newTaskItem, UserTask $newUserTask)
     {
-        $newTaskItem = new TaskItem;
         $newTaskItem->name = $request->taskItem;
         $newTaskItem->is_complete = 0;
         $newTaskItem->save();
@@ -29,7 +28,6 @@ class TaskController extends Controller
         // Create user_task record
         // this is not working
         $userId = Auth::id();
-        $newUserTask = new UserTask;
         $newUserTask->user_id = $userId;
         $newUserTask->task_item_id = $newTaskItem->id;
         $newUserTask->save();
